@@ -15,12 +15,11 @@ module.exports = {
           mnemonic: {
             phrase: keys.MNEMONIC,
           },
-          providerOrUrl: `wss://eth-ropsten.alchemyapi.io/v2/HNRUizi2ibk27NnsTF0XF8o-qSK0Fxyv`,
+          providerOrUrl: `wss://eth-ropsten.alchemyapi.io/v2/gu1DWdYJJ3RyJgdeMocUjxi0miOAzt1t`,
           addressIndex: 0,
         }),
       network_id: 3,
       gas: 5500000, // Gas Limit, How much gas we are willing to spent
-      // gasPrice: 43162694779, // how much we are willing to spent for unit of gas
       gasPrice: 100000000000, // how much we are willing to spent for unit of gas
       confirmations: 2, // number of blocks to wait between deployment
       timeoutBlocks: 400, // number of blocks before deployment times out
@@ -32,7 +31,3 @@ module.exports = {
     },
   },
 };
-
-//contract address 0xdEFABEF2e5c082A10Ff09f976A66Ec3119e12968
-
-// account 0x195E34106DA1FCd4c900047B71b9812c7F027D04

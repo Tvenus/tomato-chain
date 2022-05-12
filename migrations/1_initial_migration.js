@@ -1,5 +1,5 @@
-const TomatoChain = artifacts.require("TomatoChain");
+const TomatoCheck = artifacts.require("TomatoCheck");
 
 module.exports = function (deployer) {
-  deployer.deploy(TomatoChain);
+  deployer.deploy(TomatoCheck);
 };
