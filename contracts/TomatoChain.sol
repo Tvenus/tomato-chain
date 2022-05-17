@@ -9,22 +9,22 @@ contract TomatoCheck is AccessControl {
     bytes32 public constant ADMIN_ROLE = keccak256("ADMIN_ROLE");
     struct Product {
         uint productID;
-        string productName;
+        bytes32 productName;
         address Provider;
-        string Retailer;
+        bytes32 Retailer;
         bool isConfirmByRetailer;
     }
 
     struct ProductDiary{
         uint timestamp;
-        string message;
+        bytes32 message;
     }
 
     mapping(uint => ProductDiary[]) public productDairy;
 
     struct Company {
         address companyAddress;
-        string companyName;
+        bytes32 companyName;
     }
     bool public isStopped = false;
     mapping(address => Company) public companies;
@@ -69,10 +69,10 @@ contract TomatoCheck is AccessControl {
 
     function createProduct(
         uint productID,
-        string memory productName,
+        bytes32 productName,
         address Provider,
         bool isConfirmByRetailer,
-        string memory Retailer
+        bytes32 Retailer
     ) external payable onlyRole(COMPANY_ROLE) onlyWhenNotStopped {
         require (msg.value >= 0.0001 ether, "Invalid amount");
             Product memory product = Product(
@@ -87,7 +87,7 @@ contract TomatoCheck is AccessControl {
         
     }
 
-    function writeProductDairy(uint _productId, string memory _message) public onlyRole(COMPANY_ROLE) {
+    function writeProductDairy(uint _productId, bytes32 _message) public onlyRole(COMPANY_ROLE) {
         ProductDiary memory diary = ProductDiary(
             block.timestamp,
             _message
@@ -106,7 +106,7 @@ contract TomatoCheck is AccessControl {
 
     function setCompany(
         address companyAddress,
-        string memory companyName
+        bytes32 companyName
     ) external payable onlyWhenNotStopped {
         require(msg.value >= 0.01 ether, "Invalid amount");
         Company memory newCompany = Company (
