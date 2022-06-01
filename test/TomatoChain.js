@@ -2,6 +2,8 @@ const TomatoChain = artifacts.require("TomatoChain");
 const utils =  require("./helpers/utils");
 const companyNames = ["Twendee Company", "Tomato Company"];
 const companyName32Bytes=[web3.utils.asciiToHex(companyNames[0]),web3.utils.asciiToHex(companyNames[1])];
+const productNames = ["Tomato", "orange"];
+const productName32Bytes = productNames.map(p=>web3.utils.asciiToHex(p));
 
 contract("TomatoChain",(accounts)=>{
     let [alice, bob] = accounts;
@@ -16,11 +18,37 @@ contract("TomatoChain",(accounts)=>{
         assert.equal(result.receipt.status, true);
         assert.equal(result.logs[1].args.company[1],companyName32Bytes[0]);
     })
-    it("should not allow two companies", async () => {
+    //add new and update same function
+    xit("should not allow two companies", async () => {
         await contractInstance.setCompany(alice,companyName32Bytes[0]
             , {from: alice,value:web3.utils.toWei("0.01", "ether")});
         await utils.shouldThrow(contractInstance.setCompany(alice,companyName32Bytes[1]
             , {from: alice,value:web3.utils.toWei("0.01", "ether")}));
+    })
+    it("should not allow other address for companies", async () => {
+        await utils.shouldThrow(contractInstance.setCompany(bob,companyName32Bytes[0]
+            , {from: alice,value:web3.utils.toWei("0.01", "ether")}));
+    })
+
+    context("with the single-step transfer scenario", async () => {
+        it("should transfer a product", async () => {
+            // TODO: Test the single-step transfer scenario.
+            const result = await contractInstance.setCompany(alice,companyName32Bytes[0]
+                , {from: alice,value:web3.utils.toWei("0.01", "ether")});
+            const result2 = await contractInstance.setCompany(bob,companyName32Bytes[1]
+                , {from: bob,value:web3.utils.toWei("0.01", "ether")});
+            const resultp = await contractInstance.createProduct(1,productName32Bytes[0], alice, true
+                , {from: alice,value:web3.utils.toWei("0.01", "ether")});
+        })
+    })
+
+    context("with the two-step transfer scenario", async () => {
+        xit("should approve and then transfer a product when the approved address calls transferFrom", async () => {
+            // TODO: Test the two-step scenario.  The approved address calls transferFrom
+        })
+        it("should approve and then transfer a product when the owner calls transferFrom", async () => {
+            // TODO: Test the two-step scenario.  The owner calls transferFrom
+        })
     })
     // afterEach(async () => {
     //     await contractInstance.selfDestruct();
