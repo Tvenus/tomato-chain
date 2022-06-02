@@ -30,7 +30,7 @@ contract("TomatoChain",(accounts)=>{
             , {from: alice,value:web3.utils.toWei("0.01", "ether")}));
     })
 
-    context("with the single-step transfer scenario", async () => {
+    xcontext("with the single-step transfer scenario", async () => {
         it("should transfer a product", async () => {
             // TODO: Test the single-step transfer scenario.
             const result = await contractInstance.setCompany(alice,companyName32Bytes[0]
