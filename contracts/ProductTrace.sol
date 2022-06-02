@@ -30,7 +30,7 @@ contract ProductTrace is TomatoCheck {
 
     function transferProduct(address _from, address _to, uint _productId) external
     onlyRole(COMPANY_ROLE) checkHasProduct(_productId) {
-        require(companyProductMapping[_to][_productId].retailer!=address(0), "The receiving company already exists the product!");
+        require(companyProductMapping[_to][_productId].retailer ==address(0), "The receiving company already exists the product!");
         CompanyProduct memory companyProduct = CompanyProduct(_from,_to,_productId, RETAILER_ROLE, false);
         companyProductMapping[_to][_productId] = companyProduct;
         emit transferProductEvent(_from, _to, _productId);
