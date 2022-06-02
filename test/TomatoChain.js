@@ -1,7 +1,7 @@
 const TomatoChain = artifacts.require("TomatoChain");
 const utils =  require("./helpers/utils");
 const companyNames = ["Twendee Company", "Tomato Company"];
-const companyName32Bytes=[web3.utils.asciiToHex(companyNames[0]),web3.utils.asciiToHex(companyNames[1])];
+const companyName32Bytes=companyNames.map(p=>web3.utils.asciiToHex(p));
 const productNames = ["Tomato", "orange"];
 const productName32Bytes = productNames.map(p=>web3.utils.asciiToHex(p));
 
