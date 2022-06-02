@@ -30,28 +30,4 @@ contract("TomatoChain",(accounts)=>{
             , {from: alice,value:web3.utils.toWei("0.01", "ether")}));
     })
 
-    xcontext("with the single-step transfer scenario", async () => {
-        it("should transfer a product", async () => {
-            // TODO: Test the single-step transfer scenario.
-            const result = await contractInstance.setCompany(alice,companyName32Bytes[0]
-                , {from: alice,value:web3.utils.toWei("0.01", "ether")});
-            const result2 = await contractInstance.setCompany(bob,companyName32Bytes[1]
-                , {from: bob,value:web3.utils.toWei("0.01", "ether")});
-            const resultp = await contractInstance.createProduct(1,productName32Bytes[0], alice, true
-                , {from: alice,value:web3.utils.toWei("0.01", "ether")});
-
-        })
-    })
-
-    xcontext("with the two-step transfer scenario", async () => {
-        xit("should approve and then transfer a product when the approved address calls transferFrom", async () => {
-            // TODO: Test the two-step scenario.  The approved address calls transferFrom
-        })
-        it("should approve and then transfer a product when the owner calls transferFrom", async () => {
-            // TODO: Test the two-step scenario.  The owner calls transferFrom
-        })
-    })
-    // afterEach(async () => {
-    //     await contractInstance.selfDestruct();
-    // });
 })
