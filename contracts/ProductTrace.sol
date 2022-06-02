@@ -28,7 +28,7 @@ contract ProductTrace is TomatoCheck {
         _;
     }
 
-    function transferProduct(address _from, address _to, uint _productId) external payable
+    function transferProduct(address _from, address _to, uint _productId) external
     onlyRole(COMPANY_ROLE) checkHasProduct(_productId) {
         require(companyProductMapping[_to][_productId].retailer!=address(0), "The receiving company already exists the product!");
         CompanyProduct memory companyProduct = CompanyProduct(_from,_to,_productId, RETAILER_ROLE, false);
@@ -36,7 +36,7 @@ contract ProductTrace is TomatoCheck {
         emit transferProductEvent(_from, _to, _productId);
     }
     
-    function confirmProduct(uint _productId) external payable onlyRole(COMPANY_ROLE){
+    function confirmProduct(uint _productId) external onlyRole(COMPANY_ROLE){
         require(companyProductMapping[msg.sender][_productId].retailer!=address(0) , "The company has not received this product yet!");
         require(!companyProductMapping[msg.sender][_productId].isApproved, "The company already confirm the product!");
         CompanyProduct storage cp=companyProductMapping[msg.sender][_productId];

@@ -39,6 +39,7 @@ contract("TomatoChain",(accounts)=>{
                 , {from: bob,value:web3.utils.toWei("0.01", "ether")});
             const resultp = await contractInstance.createProduct(1,productName32Bytes[0], alice, true
                 , {from: alice,value:web3.utils.toWei("0.01", "ether")});
+
         })
     })
 
