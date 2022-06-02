@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "./TomatoChain.sol";
 
 contract ProductTrace is TomatoCheck {
@@ -29,10 +28,10 @@ contract ProductTrace is TomatoCheck {
 
     function transferProduct(address _from, address _to, uint _productId) external payable
     onlyRole(COMPANY_ROLE) checkHasProduct(_productId) {
-        require(!companyProductMapping[_to][productID].isApproved, "The receiving company already exists the product!");
+        require(!companyProductMapping[_to][_productId].isApproved, "The receiving company already exists the product!");
         CompanyProduct memory companyProduct = CompanyProduct(_productId, RETAILER_ROLE, false);
         companyProductIdMapping[_to].push(_productId);
-        companyProductIdMapping[_to][_productId] = companyProduct;
+        companyProductMapping[_to][_productId] = companyProduct;
         emit transferProductEvent(_from, _to, _productId);
     }
 }
